@@ -1,0 +1,41 @@
+lockfileVersion: '9.0'
+
+# pnpm lockfile fixture for the no-lang LOC experiment. Packages are fictional.
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@nolang-fixture/alpha':
+        specifier: ^1.0.0
+        version: 1.0.0
+    devDependencies:
+      '@nolang-fixture/gamma':
+        specifier: ~3.0.0
+        version: 3.0.0
+
+packages:
+
+  '@nolang-fixture/alpha@1.0.0':
+    resolution: {integrity: sha512-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==}
+    engines: {node: '>=18'}
+
+  '@nolang-fixture/beta@2.1.0':
+    resolution: {integrity: sha512-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB==}
+
+  '@nolang-fixture/gamma@3.0.0':
+    resolution: {integrity: sha512-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC==}
+
+snapshots:
+
+  '@nolang-fixture/alpha@1.0.0':
+    dependencies:
+      '@nolang-fixture/beta': 2.1.0
+
+  '@nolang-fixture/beta@2.1.0': {}
+
+  '@nolang-fixture/gamma@3.0.0': {}

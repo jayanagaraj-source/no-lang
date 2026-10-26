@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML test fixture for the no-lang LOC experiment. -->
+<library name="nolang-fixture-library" version="1">
+
+  <!-- Section: books -->
+  <books>
+    <book id="b1" lang="en" available="true">
+      <title>Counting Lines</title>
+      <author>A. Example</author>
+      <year>2021</year>
+    </book>
+    <book id="b2" lang="fr" available="false">
+      <title>Le Code Source</title>
+      <author>B. Exemple</author>
+      <year>2019</year>
+    </book>
+  </books>
+
+  <!--
+    Section: members
+    Multi-line comment to test comment-line counting.
+  -->
+  <members>
+    <member id="m1" role="reader" active="true"/>
+    <member id="m2" role="admin" active="false"/>
+  </members>
+
+  <settings loanDays="14" maxLoans="3" currency="EUR"/>
+
+</library>

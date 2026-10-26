@@ -6,39 +6,39 @@
 
 | File | Expected LOC (raw count) | SonarCloud LOC @997a8a8 | SonarCloud LOC (next scan) | TigerGate CLI LOC | TigerGate Dashboard LOC | SonarCloud findings @997a8a8 | SonarCloud findings (next scan) | TigerGate findings |
 |---|---|---|---|---|---|---|---|---|
-| `Dockerfile` | 14 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `LICENSE` | 22 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `Makefile` | 24 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `README.md` | 30 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `docker-compose.yml` | 34 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `build-files/build.gradle` | 24 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `build-files/build.gradle.kts` | 26 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `build-files/settings.gradle` | 18 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `build-files/settings.gradle.kts` | 17 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `gradle.properties` | 8 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `notes.txt` | 17 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `config.txt` | 18 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `README-security.md` | 20 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `CHANGELOG.md` | 13 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `deploy.sh` | 17 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `setup.sh` | 16 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `.env.example` | 9 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `application.properties` | 13 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `application.yml` | 21 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `deployment.yaml` | 39 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `service.yaml` | 22 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `config.json` | 23 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `config.xml` | 15 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `main.tf` | 47 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `index.html` | 24 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `app.js` | 19 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `main.py` | 18 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `build-files/pom.xml` | 27 | 27 @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| `Makefile.test` | 9 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
-| **Total** | 604 | 27 @997a8a8 (xml=27) | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `Dockerfile` | 14 | 0 (not indexed) @997a8a8 | 14 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 8 (docker:S2612,S6470,S6471,S6473,S6500,S7019,S7029,S8482) @932fc06 | Not tested |
+| `LICENSE` | 22 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `Makefile` | 24 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `README.md` | 30 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `docker-compose.yml` | 34 | 0 (not indexed) @997a8a8 | 0 (indexed as YAML, no LOC) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 1 (secrets:S6689) @932fc06 | Not tested |
+| `build-files/build.gradle` | 24 | 0 (not indexed) @997a8a8 | 0 (indexed, no language) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 1 (text:S8569) @932fc06 | Not tested |
+| `build-files/build.gradle.kts` | 26 | 0 (not indexed) @997a8a8 | 0 (indexed as Kotlin, no LOC) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 1 (text:S8569) @932fc06 | Not tested |
+| `build-files/settings.gradle` | 18 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `build-files/settings.gradle.kts` | 17 | 0 (not indexed) @997a8a8 | 0 (indexed as Kotlin, no LOC) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `gradle.properties` | 8 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `notes.txt` | 17 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `config.txt` | 18 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `README-security.md` | 20 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `CHANGELOG.md` | 13 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `deploy.sh` | 17 | 0 (not indexed) @997a8a8 | 17 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 1 (shell:S2612) @932fc06 | Not tested |
+| `setup.sh` | 16 | 0 (not indexed) @997a8a8 | 16 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 2 (shell:S2612) @932fc06 | Not tested |
+| `.env.example` | 9 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `application.properties` | 13 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `application.yml` | 21 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `deployment.yaml` | 39 | 0 (not indexed) @997a8a8 | 39 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 11 (kubernetes:S5849,S6428,S6430,S6431,S6864,S6865,S6870,S6873,S6892,S6897) @932fc06 | Not tested |
+| `service.yaml` | 22 | 0 (not indexed) @997a8a8 | 22 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 1 (kubernetes:S6473) @932fc06 | Not tested |
+| `config.json` | 23 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `config.xml` | 15 | 0 (not indexed) @997a8a8 | 15 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `main.tf` | 47 | 0 (not indexed) @997a8a8 | 47 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 8 (terraform:S6249,S6258,S6275,S6281,S6303,S6321,S6364,S8793) @932fc06 | Not tested |
+| `index.html` | 24 | 0 (not indexed) @997a8a8 | 24 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 2 (Web:InputWithoutLabelCheck) @932fc06 | Not tested |
+| `app.js` | 19 | 0 (not indexed) @997a8a8 | 19 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 4 (javascript:S1523,S2245,S2819; jssecurity:S5696) @932fc06 | Not tested |
+| `main.py` | 18 | 0 (not indexed) @997a8a8 | 18 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 1 (python:S4790) @932fc06 | Not tested |
+| `build-files/pom.xml` | 27 | 27 @997a8a8 | 27 @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| `Makefile.test` | 9 | 0 (not indexed) @997a8a8 | 0 (not indexed) @932fc06 | Not tested | Not tested | 0 @997a8a8 | 0 @932fc06 | Not tested |
+| **Total** | 604 | 27 @997a8a8 (xml=27) | 258 @932fc06 (15 files indexed) | Not tested | Not tested | 0 @997a8a8 | 41 @932fc06 | Not tested |
 
 The `@997a8a8` columns show that scan, when the build files were still at the repo root (`pom.xml`, not `build-files/pom.xml`).
-The "next scan" columns are for the first analysis after the build files moved. TigerGate columns: not tested.
+The "next scan" columns show `932fc06`, the first analysis after the build files moved (verified via the public Web API). TigerGate columns: not tested.
 
 ## SonarCloud scan history (observed)
 
@@ -46,7 +46,7 @@ The "next scan" columns are for the first analysis after the build files moved. 
 |---|---|---|---|---|---|---|
 | `46af553` (5 files) | 2026-10-24 01:19 | Dockerfile, docker-compose.yml | 14 | Docker 14 | 9 (Dockerfile 8, docker-compose.yml 1) | SonarCloud UI screenshots |
 | `997a8a8` (31 files) | 2026-10-26 11:55 | **pom.xml only** (root path) | **27** | XML 27 | **0** (0 hotspots) | Public Web API, see below |
-| Next commit (build files moved to `build-files/`) | — | Pending verification | Pending verification | Pending verification | Pending verification | — |
+| `932fc06` (31 files, build files in `build-files/`) | 2026-10-26 12:11 | 15 files | **258** | Terraform 47, YAML 61, XML 42, Shell 33, HTML 24, JS 19, Python 18, Docker 14 | **41** (0 hotspots) | Public Web API |
 
 The `46af553` analysis no longer exists in SonarCloud. The project was deleted and re-imported, so the API lists only one analysis.
 
@@ -72,7 +72,9 @@ The `46af553` analysis no longer exists in SonarCloud. The project was deleted a
 1. **(Applied in commit "test: reorganize build files for SonarCloud LOC analysis".)** Move `pom.xml`, `build.gradle`, `build.gradle.kts`, `settings.gradle` and `settings.gradle.kts` into a subdirectory such as `build-files/`. Contents stay the same, but paths change. Per the docs, root-level detection is what triggers Java mode.
 2. Not applied: switch to CI-based analysis (SonarScanner CLI with `sonar.sources=.`). This changes the analysis mode, and Automatic Analysis must be turned off.
 
-**Hypothesis under test:** with no `pom.xml`, `build.gradle` or `build.gradle.kts` at the root, Automatic Analysis stops using Java standard-layout scope and indexes the whole repo.
+**Result at `932fc06`:** whole-repo scope restored: 15 files indexed, 258 LOC, 41 issues (verified). This supports the root-build-file explanation for `997a8a8`.
+
+**Hypothesis that was tested:** with no `pom.xml`, `build.gradle` or `build.gradle.kts` at the root, Automatic Analysis stops using Java standard-layout scope and indexes the whole repo.
 This is **not guaranteed**. The docs do not say how build files in a subdirectory are treated in Automatic Analysis, apart from noting that CI-based analysis is required for Gradle builds that are not at the root.
 
 **Comparison finding:** with Automatic Analysis, adding one Maven/Gradle build file at the root shrank SonarCloud's scan from 2 files and 14 LOC to 1 file and 27 LOC, and dropped issues from 9 to 0. TigerGate should be checked for any similar scope switch.
