@@ -1,0 +1,19 @@
+{
+  "name": "tigergate-test-path-traversal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SAST regression fixtures for path traversal (gitlab.eslint.detect-non-literal-fs-filename). Fixtures only - nothing here starts a server.",
+  "license": "MIT",
+  "scripts": {
+    "check:js": "for f in vulnerable/*.js safe/*.js edge-cases/*.js; do node --check \"$f\" || exit 1; done",
+    "check:ts": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,729 @@
+{
+  "schema_version": 1,
+  "repository": "tigergate-test-path-traversal",
+  "rules": {
+    "current": "gitlab.eslint.detect-non-literal-fs-filename",
+    "proposed": "tigergate.javascript.path-traversal.taint-fs-filename (proposed name; does not exist yet)"
+  },
+  "line_convention": "1-based line where the sink call starts (Semgrep reports the start line of a match).",
+  "prediction_legend": {
+    "LIKELY_REPORTED": "fs.* call with a non-literal path argument; the broad rule should match",
+    "NOT_REPORTED": "outside the rule's fs-only scope",
+    "UNCERTAIN": "depends on pattern details or Semgrep constant propagation",
+    "REPORT / NO_REPORT / CONTEXT_DEPENDENT": "expected behavior of a taint-based replacement"
+  },
+  "summary": {
+    "total": 37,
+    "tp_cases": 16,
+    "safe_cases": 14,
+    "edge_cases": 7,
+    "edge_classification": {
+      "TP": 2,
+      "CONTEXT_DEPENDENT": 5,
+      "SAFE": 0
+    }
+  },
+  "cases": [
+    {
+      "id": "TG-PATH-TP-001",
+      "file": "vulnerable/direct-input.js",
+      "line": 10,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.filename",
+      "sink": "fs.readFile",
+      "reason": "User-controlled filename reaches a filesystem read with no validation.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-002",
+      "file": "vulnerable/path-join.js",
+      "line": 13,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.filename",
+      "sink": "fs.readFileSync",
+      "reason": "path.join() keeps '../' segments, so the path can leave /app/uploads.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-003",
+      "file": "vulnerable/template-literal.js",
+      "line": 9,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.params.name",
+      "sink": "fs.readFileSync",
+      "reason": "Route parameter interpolated into a template-literal path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-004",
+      "file": "vulnerable/file-write.js",
+      "line": 9,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.body.filename",
+      "sink": "fs.writeFileSync",
+      "reason": "Arbitrary file write via a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-005",
+      "file": "vulnerable/file-delete.js",
+      "line": 9,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.name",
+      "sink": "fs.unlinkSync",
+      "reason": "Arbitrary file deletion via a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-006",
+      "file": "vulnerable/file-stream.js",
+      "line": 9,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.createReadStream",
+      "reason": "Read stream opened on a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-007",
+      "file": "vulnerable/helper-function.js",
+      "line": 14,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.filename",
+      "sink": "fs.readFileSync",
+      "reason": "Tainted value flows through helper buildPath() into the sink.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-008",
+      "file": "vulnerable/weak-validation.js",
+      "line": 11,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.filename",
+      "sink": "fs.readFileSync",
+      "reason": "replace('../','') strips only the first occurrence; '....//' still escapes.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-009",
+      "file": "vulnerable/weak-validation.js",
+      "line": 20,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.readFileSync",
+      "reason": "startsWith(base) without a trailing separator accepts sibling dirs such as /app/uploads-private.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-010",
+      "file": "vulnerable/async-filesystem.js",
+      "line": 9,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.promises.readFile",
+      "reason": "Promise-based read of a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "Unknown whether the registry pattern covers fs.promises.* calls."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-011",
+      "file": "vulnerable/express-download.js",
+      "line": 8,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.filename",
+      "sink": "res.download",
+      "reason": "Express res.download serves a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "NOT_REPORTED",
+        "note": "Not an fs.* call, so the fs-only rule is not expected to match."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-012",
+      "file": "vulnerable/typescript-paths.ts",
+      "line": 15,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.readFileSync",
+      "reason": "Typed Express query value reaches fs.readFileSync (TypeScript).",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-013",
+      "file": "vulnerable/file-write.js",
+      "line": 18,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.body.from / req.body.to",
+      "sink": "fs.renameSync",
+      "reason": "Both rename source and destination are attacker-controlled.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-014",
+      "file": "vulnerable/file-write.js",
+      "line": 23,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.body.src",
+      "sink": "fs.copyFileSync",
+      "reason": "Copy source is attacker-controlled (arbitrary file read into backup).",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-015",
+      "file": "vulnerable/file-delete.js",
+      "line": 16,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.dir",
+      "sink": "fs.rmSync",
+      "reason": "Recursive delete of a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-TP-016",
+      "file": "vulnerable/async-filesystem.js",
+      "line": 16,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.promises.open",
+      "reason": "Promise-based open of a user-controlled path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "Unknown whether the registry pattern covers fs.promises.* calls."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-001",
+      "file": "safe/constant-path.js",
+      "line": 6,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "constant string",
+      "sink": "fs.readFileSync",
+      "reason": "Variable holds only a string literal.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "Non-literal identifier; Semgrep constant propagation may treat it as a literal."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-002",
+      "file": "safe/static-config.js",
+      "line": 14,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "static config object",
+      "sink": "fs.readFileSync",
+      "reason": "Path comes from a hardcoded configuration object.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-003",
+      "file": "safe/generated-filename.js",
+      "line": 9,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "crypto.randomUUID()",
+      "sink": "fs.writeFileSync",
+      "reason": "Filename is server-generated; no user input in the path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-004",
+      "file": "safe/strict-allowlist.js",
+      "line": 20,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "req.query.type (allowlist key)",
+      "sink": "fs.readFileSync",
+      "reason": "User input only selects a value from a fixed allowlist; unknown keys throw.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-005",
+      "file": "safe/validated-id.js",
+      "line": 15,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "req.params.id (validated)",
+      "sink": "fs.readFileSync",
+      "reason": "^[0-9]{1,10}$ allows digits only, so no separators or dots.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-006",
+      "file": "safe/path-containment.js",
+      "line": 20,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "req.query.file (contained)",
+      "sink": "fs.readFileSync",
+      "reason": "resolve + relative boundary check rejects escapes. Assumes no attacker-controlled symlinks under BASE.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-007",
+      "file": "safe/safe-helper.js",
+      "line": 12,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "getLogPath() constant helper",
+      "sink": "fs.readFileSync",
+      "reason": "Helper returns a path built only from literals.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-008",
+      "file": "safe/safe-stream.js",
+      "line": 7,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "module constant",
+      "sink": "fs.createReadStream",
+      "reason": "Stream opened on a module-level constant path.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "Constant propagation may suppress it."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-009",
+      "file": "safe/safe-async.js",
+      "line": 9,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "os.tmpdir() + crypto.randomUUID()",
+      "sink": "fs.promises.readFile",
+      "reason": "Server-generated path; no user input.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "fs.promises coverage unknown."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-010",
+      "file": "safe/typescript-safe.ts",
+      "line": 23,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "req.query.kind (typed allowlist)",
+      "sink": "fs.readFileSync",
+      "reason": "Type guard restricts input to known keys of a const allowlist.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-011",
+      "file": "safe/constant-path.js",
+      "line": 12,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "constant concatenation",
+      "sink": "fs.readFileSync",
+      "reason": "Concatenation of string literals only.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "Constant folding may suppress it."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-012",
+      "file": "safe/static-config.js",
+      "line": 18,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "frozen static config",
+      "sink": "fs.readFileSync",
+      "reason": "Path from an Object.freeze'd constant map.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-013",
+      "file": "safe/validated-id.js",
+      "line": 28,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "req.query.name (validated)",
+      "sink": "fs.readFileSync",
+      "reason": "^[a-z0-9_-]{1,64}\\.txt$ excludes separators and traversal sequences.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED",
+        "note": "Expected false positive of the broad rule."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-SAFE-014",
+      "file": "safe/safe-helper.js",
+      "line": 17,
+      "expected": "SAFE",
+      "category": "Path Traversal",
+      "source": "fixed template literal",
+      "sink": "fs.readFileSync",
+      "reason": "Template literal interpolates only a module constant.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "UNCERTAIN",
+        "note": "Constant propagation through templates may suppress it."
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "NO_REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-001",
+      "file": "edge-cases/basename.js",
+      "line": 15,
+      "expected": "CONTEXT_DEPENDENT",
+      "category": "Path Traversal",
+      "source": "path.basename(req.query.file)",
+      "sink": "fs.readFileSync",
+      "reason": "basename prevents directory traversal on POSIX but gives no authorization guarantee; backslashes are literal on POSIX.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "CONTEXT_DEPENDENT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-002",
+      "file": "edge-cases/cli-argument.js",
+      "line": 13,
+      "expected": "CONTEXT_DEPENDENT",
+      "category": "Path Traversal",
+      "source": "process.argv[2]",
+      "sink": "fs.readFileSync",
+      "reason": "Trusted for a local CLI run by its own user; untrusted if the CLI runs with more privilege than its caller.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "CONTEXT_DEPENDENT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-003",
+      "file": "edge-cases/environment-path.js",
+      "line": 10,
+      "expected": "CONTEXT_DEPENDENT",
+      "category": "Path Traversal",
+      "source": "process.env.FILE_PATH",
+      "sink": "fs.readFileSync",
+      "reason": "Trusted if set by the operator; untrusted if the environment is populated from request data.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "CONTEXT_DEPENDENT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-004",
+      "file": "edge-cases/symlink-containment.js",
+      "line": 32,
+      "expected": "CONTEXT_DEPENDENT",
+      "category": "Path Traversal",
+      "source": "req.query.file (lexically contained)",
+      "sink": "fs.readFileSync",
+      "reason": "Lexical check passes for a symlink under BASE that points outside it. Safe only if attackers cannot create symlinks there.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "CONTEXT_DEPENDENT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-005",
+      "file": "edge-cases/encoded-input.js",
+      "line": 21,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.readFileSync",
+      "reason": "Check runs before decodeURIComponent, so '%2e%2e%2f' passes and becomes '../'.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-006",
+      "file": "edge-cases/encoded-input.js",
+      "line": 29,
+      "expected": "CONTEXT_DEPENDENT",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.readFileSync",
+      "reason": "Only '../' is rejected. '..\\\\' escapes on Windows hosts but is a literal filename on POSIX.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    },
+    {
+      "id": "TG-PATH-EDGE-007",
+      "file": "edge-cases/symlink-containment.js",
+      "line": 37,
+      "expected": "TP",
+      "category": "Path Traversal",
+      "source": "req.query.file",
+      "sink": "fs.readFileSync",
+      "reason": "path.normalize() keeps leading '..' segments and there is no containment check.",
+      "current_rule": {
+        "rule_id": "gitlab.eslint.detect-non-literal-fs-filename",
+        "prediction": "LIKELY_REPORTED"
+      },
+      "proposed_rule": {
+        "rule_id": "tigergate.javascript.path-traversal.taint-fs-filename",
+        "expected": "REPORT"
+      }
+    }
+  ],
+  "incidental_sinks": [
+    {
+      "file": "edge-cases/symlink-containment.js",
+      "line": 22,
+      "code": "const realBase = fs.realpathSync(BASE);",
+      "current_rule": "MAY_BE_REPORTED",
+      "proposed_rule": "NO_REPORT",
+      "reason": "Not a test case: fs call on a non-user-controlled value. If the broad rule reports it, count it as noise, not as a TP or FP case."
+    },
+    {
+      "file": "edge-cases/symlink-containment.js",
+      "line": 23,
+      "code": "const realTarget = fs.realpathSync(target);",
+      "current_rule": "MAY_BE_REPORTED",
+      "proposed_rule": "NO_REPORT",
+      "reason": "Not a test case: fs call on a non-user-controlled value. If the broad rule reports it, count it as noise, not as a TP or FP case."
+    }
+  ]
+}
