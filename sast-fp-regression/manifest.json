@@ -1,0 +1,2180 @@
+{
+  "schema_version": 1,
+  "evidence": "observed_local = worker-equivalent Semgrep 1.168.0 run (served org ruleset + 41 default registry packs + worker excludes/excluded rules). NOT a Dashboard or CLI scan; findingfold/dedupe not applied.",
+  "line_convention": "line = marker line (sink). A finding counts as on-line when its range covers it; case_span = enclosing handler/function.",
+  "totals_local": {
+    "fixtures": 75,
+    "fp_cases_reproduced": 20,
+    "confirmed_false_positives_reproduced": 12,
+    "candidate_false_positives_reproduced": 8,
+    "fp_cases_not_reproduced": 7,
+    "positive_controls": 29,
+    "positive_controls_detected_by_target_rule": 16,
+    "positive_controls_detected_by_other_rule": 3,
+    "missing_detections": 10,
+    "safe_negatives": 12,
+    "safe_negatives_incorrectly_flagged": 6,
+    "review_required": 7
+  },
+  "cases": [
+    {
+      "id": "FP-FMT-C-001",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 9,
+      "case_span": [
+        5,
+        9
+      ],
+      "expected_rule": [
+        "insecure-use-printf-fn"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "not reproduced"
+      },
+      "notes": "Literal format."
+    },
+    {
+      "id": "FP-FMT-C-002",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 10,
+      "case_span": [
+        5,
+        10
+      ],
+      "expected_rule": [
+        "insecure-use-printf-fn"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "not reproduced"
+      },
+      "notes": "Literal format (fprintf)."
+    },
+    {
+      "id": "FP-FMT-C-003",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 11,
+      "case_span": [
+        5,
+        11
+      ],
+      "expected_rule": [
+        "insecure-use-printf-fn"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "not reproduced"
+      },
+      "notes": "Literal format (snprintf)."
+    },
+    {
+      "id": "FP-FMT-C-004",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 12,
+      "case_span": [
+        5,
+        12
+      ],
+      "expected_rule": [
+        "insecure-use-printf-fn"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "not reproduced"
+      },
+      "notes": "User input only as an argument, via a parameter."
+    },
+    {
+      "id": "TP-FMT-C-001",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 15,
+      "case_span": [
+        5,
+        15
+      ],
+      "expected_rule": [
+        "CPP-002",
+        "insecure-use-printf-fn"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "CPP-002"
+        ],
+        "all_rules_on_line": [
+          "CPP-002"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "printf(user_input)."
+    },
+    {
+      "id": "TP-FMT-C-002",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 16,
+      "case_span": [
+        5,
+        16
+      ],
+      "expected_rule": [
+        "CPP-002",
+        "insecure-use-printf-fn"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "CPP-002"
+        ],
+        "all_rules_on_line": [
+          "CPP-002"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "fprintf(stderr, user_input)."
+    },
+    {
+      "id": "TP-FMT-C-003",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 17,
+      "case_span": [
+        5,
+        17
+      ],
+      "expected_rule": [
+        "CPP-002",
+        "insecure-use-printf-fn"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [
+          "CPP-002"
+        ],
+        "outcome": "MISSED"
+      },
+      "notes": "snprintf(buffer, size, user_input)."
+    },
+    {
+      "id": "FP-FMT-C-005",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 30,
+      "case_span": [
+        20,
+        30
+      ],
+      "expected_rule": [
+        "insecure-use-printf-fn"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn"
+        ],
+        "all_rules_on_line": [
+          "c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Literal format with argv[1] as an argument (the shape seen in tigergate-test-c)."
+    },
+    {
+      "id": "FP-FMT-C-006",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 33,
+      "case_span": [
+        20,
+        33
+      ],
+      "expected_rule": [
+        "insecure-use-printf-fn"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn"
+        ],
+        "all_rules_on_line": [
+          "c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn"
+        ],
+        "other_rules_in_case": [
+          "c.lang.security.insecure-use-string-copy-fn.insecure-use-string-copy-fn"
+        ],
+        "outcome": "FP reproduced"
+      },
+      "notes": "argv copied to a buffer, printed via a literal %s."
+    },
+    {
+      "id": "TP-FMT-C-004",
+      "language": "c",
+      "file": "c/format-string.c",
+      "line": 34,
+      "case_span": [
+        20,
+        34
+      ],
+      "expected_rule": [
+        "CPP-002",
+        "insecure-use-printf-fn"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "CPP-002",
+          "c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn"
+        ],
+        "all_rules_on_line": [
+          "CPP-002",
+          "c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn"
+        ],
+        "other_rules_in_case": [
+          "c.lang.security.insecure-use-string-copy-fn.insecure-use-string-copy-fn"
+        ],
+        "outcome": "detected"
+      },
+      "notes": "printf(argv[1])."
+    },
+    {
+      "id": "FP-XSS-GO-001",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 17,
+      "case_span": [
+        15,
+        17
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "all_rules_on_line": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "other_rules_in_case": [
+          "GO-066"
+        ],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Fixed server file. Classified candidate (not confirmed): safe only if that file is not attacker-writable."
+    },
+    {
+      "id": "FP-XSS-GO-002",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 22,
+      "case_span": [
+        20,
+        22
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "all_rules_on_line": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Fixed command with no user input."
+    },
+    {
+      "id": "FP-XSS-GO-003",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 26,
+      "case_span": [
+        25,
+        26
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "not reproduced"
+      },
+      "notes": "Constant text."
+    },
+    {
+      "id": "REVIEW-XSS-GO-004",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 33,
+      "case_span": [
+        31,
+        33
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "all_rules_on_line": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "other_rules_in_case": [
+          "GO-066",
+          "TG-TAINT-GO-PATH-TRAVERSAL"
+        ],
+        "outcome": "flagged"
+      },
+      "notes": "User-chosen file written to the response (path traversal; XSS depends on content)."
+    },
+    {
+      "id": "TP-XSS-GO-001",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 40,
+      "case_span": [
+        38,
+        40
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter"
+        ],
+        "all_rules_on_line": [
+          "go.lang.security.audit.xss.no-direct-write-to-responsewriter.no-direct-write-to-responsewriter",
+          "go.lang.security.injection.raw-html-format.raw-html-format"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Query value in an HTML response."
+    },
+    {
+      "id": "TP-XSS-GO-002",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 46,
+      "case_span": [
+        45,
+        46
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [
+          "go.lang.security.audit.xss.template-html-does-not-escape.unsafe-template-type"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected by another rule"
+      },
+      "notes": "template.HTML(user input) bypasses escaping."
+    },
+    {
+      "id": "TP-XSS-GO-003",
+      "language": "go",
+      "file": "go/xss-response.go",
+      "line": 56,
+      "case_span": [
+        49,
+        56
+      ],
+      "expected_rule": [
+        "no-direct-write-to-responsewriter"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [
+          "TG-TAINT-GO-SSRF",
+          "go.lang.security.injection.tainted-url-host.tainted-url-host"
+        ],
+        "outcome": "MISSED"
+      },
+      "notes": "SSRF body copied into a text/html response."
+    },
+    {
+      "id": "FP-XSS-JAVA-001",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 17,
+      "case_span": [
+        16,
+        17
+      ],
+      "expected_rule": [
+        "XSS_SERVLET_PARAMETER-1"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "all_rules_on_line": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "getParameter used only for a boolean; nothing is written."
+    },
+    {
+      "id": "FP-XSS-JAVA-002",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 25,
+      "case_span": [
+        23,
+        25
+      ],
+      "expected_rule": [
+        "JAVA-011",
+        "XSS_SERVLET_PARAMETER-1"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "JAVA-011"
+        ],
+        "all_rules_on_line": [
+          "JAVA-011",
+          "gitlab.find_sec_bugs.SERVLET_PARAMETER-1.SERVLET_CONTENT_TYPE-1.SERVLET_SERVER_NAME-1.SERVLET_SESSION_ID-1.SERVLET_QUERY_STRING-1.SERVLET_HEADER-1.SERVLET_HEADER_REFERER-1.SERVLET_HEADER_USER_AGENT-1",
+          "gitlab.find_sec_bugs.XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER-1",
+          "java.lang.security.audit.xss.no-direct-response-writer.no-direct-response-writer"
+        ],
+        "other_rules_in_case": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Integer.parseInt output cannot carry markup."
+    },
+    {
+      "id": "FP-XSS-JAVA-003",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 31,
+      "case_span": [
+        29,
+        31
+      ],
+      "expected_rule": [
+        "XSS_SERVLET_PARAMETER-1"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "all_rules_on_line": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Stored in session; not rendered here."
+    },
+    {
+      "id": "FP-XSS-JAVA-004",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 45,
+      "case_span": [
+        36,
+        45
+      ],
+      "expected_rule": [
+        "JAVA-011"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "JAVA-011"
+        ],
+        "all_rules_on_line": [
+          "JAVA-011",
+          "gitlab.find_sec_bugs.SERVLET_PARAMETER-1.SERVLET_CONTENT_TYPE-1.SERVLET_SERVER_NAME-1.SERVLET_SESSION_ID-1.SERVLET_QUERY_STRING-1.SERVLET_HEADER-1.SERVLET_HEADER_REFERER-1.SERVLET_HEADER_USER_AGENT-1",
+          "gitlab.find_sec_bugs.XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER-1",
+          "java.lang.security.audit.xss.no-direct-response-writer.no-direct-response-writer"
+        ],
+        "other_rules_in_case": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Complete HTML encoding, ampersand first."
+    },
+    {
+      "id": "TP-XSS-JAVA-001",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 51,
+      "case_span": [
+        50,
+        51
+      ],
+      "expected_rule": [
+        "XSS_SERVLET_PARAMETER-1",
+        "JAVA-011"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "all_rules_on_line": [
+          "gitlab.find_sec_bugs.XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER-1",
+          "gitlab.find_sec_bugs.XSS_SERVLET-1",
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1",
+          "java.lang.security.audit.xss.no-direct-response-writer.no-direct-response-writer"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Parameter written directly."
+    },
+    {
+      "id": "TP-XSS-JAVA-002",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 58,
+      "case_span": [
+        54,
+        58
+      ],
+      "expected_rule": [
+        "XSS_SERVLET_PARAMETER-1",
+        "JAVA-011"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [
+          "gitlab.find_sec_bugs.SERVLET_PARAMETER-1.SERVLET_CONTENT_TYPE-1.SERVLET_SERVER_NAME-1.SERVLET_SESSION_ID-1.SERVLET_QUERY_STRING-1.SERVLET_HEADER-1.SERVLET_HEADER_REFERER-1.SERVLET_HEADER_USER_AGENT-1",
+          "gitlab.find_sec_bugs.XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER-1",
+          "java.lang.security.audit.xss.no-direct-response-writer.no-direct-response-writer"
+        ],
+        "other_rules_in_case": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "outcome": "detected by another rule"
+      },
+      "notes": "Parameter in text/html without encoding."
+    },
+    {
+      "id": "TP-XSS-JAVA-003",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 65,
+      "case_span": [
+        62,
+        65
+      ],
+      "expected_rule": [
+        "XSS_SERVLET_PARAMETER-1",
+        "JAVA-011"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "JAVA-011"
+        ],
+        "all_rules_on_line": [
+          "JAVA-011",
+          "gitlab.find_sec_bugs.SERVLET_PARAMETER-1.SERVLET_CONTENT_TYPE-1.SERVLET_SERVER_NAME-1.SERVLET_SESSION_ID-1.SERVLET_QUERY_STRING-1.SERVLET_HEADER-1.SERVLET_HEADER_REFERER-1.SERVLET_HEADER_USER_AGENT-1",
+          "gitlab.find_sec_bugs.XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER-1",
+          "java.lang.security.audit.xss.no-direct-response-writer.no-direct-response-writer"
+        ],
+        "other_rules_in_case": [
+          "gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1"
+        ],
+        "outcome": "detected"
+      },
+      "notes": "Incomplete escaping in a quoted attribute."
+    },
+    {
+      "id": "SAFE-XSS-JAVA-001",
+      "language": "java",
+      "file": "java/XssServletRegression.java",
+      "line": 71,
+      "case_span": [
+        70,
+        71
+      ],
+      "expected_rule": [
+        "XSS_SERVLET_PARAMETER-1",
+        "JAVA-011"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "clean"
+      },
+      "notes": "Constant body."
+    },
+    {
+      "id": "FP-FMT-JS-001",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 11,
+      "case_span": [
+        9,
+        11
+      ],
+      "expected_rule": [
+        "unsafe-formatstring"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring"
+        ],
+        "all_rules_on_line": [
+          "javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Internal task name concatenated into the console.log format argument."
+    },
+    {
+      "id": "FP-FMT-JS-002",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 16,
+      "case_span": [
+        15,
+        16
+      ],
+      "expected_rule": [
+        "unsafe-formatstring"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring"
+        ],
+        "all_rules_on_line": [
+          "javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Internal count concatenated before a %d placeholder."
+    },
+    {
+      "id": "FP-FMT-JS-003",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 20,
+      "case_span": [
+        19,
+        20
+      ],
+      "expected_rule": [
+        "unsafe-formatstring"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring"
+        ],
+        "all_rules_on_line": [
+          "javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Internal worker id."
+    },
+    {
+      "id": "TP-LOG-JS-001",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 26,
+      "case_span": [
+        25,
+        26
+      ],
+      "expected_rule": [
+        "LOG-003"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding (log injection)",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "MISSED"
+      },
+      "notes": "Username with newline forges log lines."
+    },
+    {
+      "id": "TP-LOG-JS-002",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 31,
+      "case_span": [
+        30,
+        31
+      ],
+      "expected_rule": [
+        "LOG-003"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding (log injection)",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "MISSED"
+      },
+      "notes": "Carriage-return injection via query value."
+    },
+    {
+      "id": "TP-LOG-JS-003",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 36,
+      "case_span": [
+        35,
+        36
+      ],
+      "expected_rule": [
+        "LOG-003"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding (log injection)",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "MISSED"
+      },
+      "notes": "Forged key=value entry."
+    },
+    {
+      "id": "TP-LOG-JS-004",
+      "language": "javascript",
+      "file": "javascript/log-format.js",
+      "line": 41,
+      "case_span": [
+        40,
+        41
+      ],
+      "expected_rule": [
+        "LOG-003"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding (log injection)",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "MISSED"
+      },
+      "notes": "User input breaks JSON log structure."
+    },
+    {
+      "id": "SAFE-XSS-JS-010",
+      "language": "typescript",
+      "file": "javascript/xss-controls-typed.ts",
+      "line": 24,
+      "case_span": [
+        19,
+        24
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "JS-048",
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FLAGGED (FP)"
+      },
+      "notes": "Copied from SAFE-010: typed allowlist (TypeScript)."
+    },
+    {
+      "id": "SAFE-XSS-JS-004",
+      "language": "javascript",
+      "file": "javascript/xss-controls.js",
+      "line": 22,
+      "case_span": [
+        16,
+        22
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "JS-048",
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FLAGGED (FP)"
+      },
+      "notes": "Copied from path-traversal SAFE-004: allowlisted server file."
+    },
+    {
+      "id": "SAFE-XSS-JS-005",
+      "language": "javascript",
+      "file": "javascript/xss-controls.js",
+      "line": 31,
+      "case_span": [
+        26,
+        31
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "JS-048",
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FLAGGED (FP)"
+      },
+      "notes": "Copied from SAFE-005: digits-only id."
+    },
+    {
+      "id": "SAFE-XSS-JS-006",
+      "language": "javascript",
+      "file": "javascript/xss-controls.js",
+      "line": 43,
+      "case_span": [
+        37,
+        43
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "outcome": "FLAGGED (FP)"
+      },
+      "notes": "Copied from SAFE-006: resolve + relative containment."
+    },
+    {
+      "id": "SAFE-XSS-JS-013",
+      "language": "javascript",
+      "file": "javascript/xss-controls.js",
+      "line": 52,
+      "case_span": [
+        47,
+        52
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "JS-048",
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FLAGGED (FP)"
+      },
+      "notes": "Copied from SAFE-013: strict filename regex."
+    },
+    {
+      "id": "SAFE-XSS-JS-ESC",
+      "language": "javascript",
+      "file": "javascript/xss-controls.js",
+      "line": 66,
+      "case_span": [
+        65,
+        66
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+          "javascript.express.security.injection.raw-html-format.raw-html-format"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "clean"
+      },
+      "notes": "Fully HTML-escaped reflection."
+    },
+    {
+      "id": "SAFE-XSS-JS-CONST",
+      "language": "javascript",
+      "file": "javascript/xss-controls.js",
+      "line": 70,
+      "case_span": [
+        69,
+        70
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "clean"
+      },
+      "notes": "Constant HTML."
+    },
+    {
+      "id": "FP-XSS-JS-001",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 16,
+      "case_span": [
+        14,
+        16
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-PATH-TRAVERSAL",
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "outcome": "FP reproduced"
+      },
+      "notes": "File read from a user-chosen path then sent. The real bug is path traversal; XSS depends on whether an attacker controls the file's content and the response type."
+    },
+    {
+      "id": "FP-XSS-JS-002",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 21,
+      "case_span": [
+        19,
+        21
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-PATH-TRAVERSAL",
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Same as FP-XSS-JS-001 via fs.promises.readFile."
+    },
+    {
+      "id": "FP-XSS-JS-003",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 26,
+      "case_span": [
+        24,
+        26
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-PATH-TRAVERSAL",
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "outcome": "not reproduced"
+      },
+      "notes": "Same as FP-XSS-JS-001 via fs.readFile callback."
+    },
+    {
+      "id": "REVIEW-XSS-JS-004",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 32,
+      "case_span": [
+        30,
+        32
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-CMD-INJECTION",
+          "javascript.lang.security.detect-child-process.detect-child-process"
+        ],
+        "outcome": "flagged"
+      },
+      "notes": "execSync(user command) output sent. Command injection is real; the attacker controls the command, so HTML in the output is plausible."
+    },
+    {
+      "id": "FP-XSS-JS-005",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 37,
+      "case_span": [
+        35,
+        37
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "candidate_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no XSS finding (command-injection rules unaffected)",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "execFileSync with an argument array: output is git log text; attacker influence is limited to a path filter."
+    },
+    {
+      "id": "REVIEW-XSS-JS-006",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 42,
+      "case_span": [
+        40,
+        42
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write"
+        ],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-CMD-INJECTION",
+          "javascript.shelljs.security.shelljs-exec-injection.shelljs-exec-injection"
+        ],
+        "outcome": "flagged"
+      },
+      "notes": "shelljs exec output sent; command string includes user input."
+    },
+    {
+      "id": "TP-XSS-JS-001",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 48,
+      "case_span": [
+        47,
+        48
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-JS-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-JS-XSS",
+          "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+          "javascript.express.security.injection.raw-html-format.raw-html-format"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Direct reflected XSS."
+    },
+    {
+      "id": "TP-XSS-JS-002",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 52,
+      "case_span": [
+        51,
+        52
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [
+          "javascript.express.security.injection.raw-html-format.raw-html-format"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected by another rule"
+      },
+      "notes": "req.body reflected in an explicit text/html response."
+    },
+    {
+      "id": "TP-XSS-JS-003",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 61,
+      "case_span": [
+        55,
+        61
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-PATH-TRAVERSAL",
+          "javascript.express.security.audit.express-path-join-resolve-traversal.express-path-join-resolve-traversal",
+          "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal"
+        ],
+        "outcome": "MISSED"
+      },
+      "notes": "Stored XSS: user-uploaded HTML served as text/html. The path is validated; the content is attacker-controlled."
+    },
+    {
+      "id": "TP-XSS-JS-004",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 66,
+      "case_span": [
+        64,
+        66
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "MISSED"
+      },
+      "notes": "User input echoed by a command and returned as HTML."
+    },
+    {
+      "id": "TP-XSS-JS-005",
+      "language": "javascript",
+      "file": "javascript/xss-output.js",
+      "line": 71,
+      "case_span": [
+        69,
+        71
+      ],
+      "expected_rule": [
+        "TG-TAINT-JS-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [
+          "TG-TAINT-JS-SSRF"
+        ],
+        "outcome": "MISSED"
+      },
+      "notes": "SSRF: attacker-chosen URL's body returned as HTML."
+    },
+    {
+      "id": "FP-SQL-PHP-001",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 8,
+      "case_span": [
+        6,
+        8
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-SQL-INJECTION"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "XPath-injection finding instead of SQLi",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "DOMXPath::query is XPath, not SQL. Genuine injection, wrong class."
+    },
+    {
+      "id": "FP-SQL-PHP-002",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 12,
+      "case_span": [
+        11,
+        12
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-SQL-INJECTION"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no SQLi finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Search client query(), not SQL."
+    },
+    {
+      "id": "FP-SQL-PHP-003",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 16,
+      "case_span": [
+        15,
+        16
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-SQL-INJECTION"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no SQLi finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "GraphQL client query(), not SQL."
+    },
+    {
+      "id": "TP-SQL-PHP-001",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 22,
+      "case_span": [
+        21,
+        22
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-SQL-INJECTION"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-SQL-INJECTION-PHP",
+          "TG-TAINT-PHP-SQL-INJECTION",
+          "php.lang.security.injection.tainted-sql-string.tainted-sql-string"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "PDO::query with concatenated input."
+    },
+    {
+      "id": "TP-SQL-PHP-002",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 26,
+      "case_span": [
+        25,
+        26
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-SQL-INJECTION"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-SQL-INJECTION-PHP",
+          "TG-TAINT-PHP-SQL-INJECTION",
+          "php.lang.security.injection.tainted-sql-string.tainted-sql-string"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "mysqli_query with concatenated input."
+    },
+    {
+      "id": "TP-XPATH-PHP-001",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 31,
+      "case_span": [
+        29,
+        31
+      ],
+      "expected_rule": [
+        "XPath injection rule"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding (XPath)",
+      "future_expected_behavior": "XPath-injection finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-SQL-INJECTION"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "MISSED (only the SQLi rule fired: wrong class)"
+      },
+      "notes": "XPath injection positive control."
+    },
+    {
+      "id": "SAFE-SQL-PHP-001",
+      "language": "php",
+      "file": "php/xpath-sql.php",
+      "line": 38,
+      "case_span": [
+        36,
+        38
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-SQL-INJECTION"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "clean"
+      },
+      "notes": "Prepared statement."
+    },
+    {
+      "id": "REVIEW-XSS-PHP-001",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 8,
+      "case_span": [
+        6,
+        8
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-XSS",
+          "php.lang.security.injection.echoed-request.echoed-request"
+        ],
+        "other_rules_in_case": [
+          "PHP-008",
+          "TG-COMMAND-INJECTION-PHP",
+          "TG-TAINT-PHP-CMD-INJECTION",
+          "php.lang.security.exec-use.exec-use",
+          "php.lang.security.injection.tainted-exec.tainted-exec",
+          "php.lang.security.tainted-exec.tainted-exec"
+        ],
+        "outcome": "flagged"
+      },
+      "notes": "shell_exec output echoed; command injection is the primary bug, and the attacker can shape the output."
+    },
+    {
+      "id": "REVIEW-XSS-PHP-002",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 13,
+      "case_span": [
+        11,
+        13
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [
+          "TG-COMMAND-INJECTION-PHP",
+          "TG-TAINT-PHP-CMD-INJECTION",
+          "php.lang.security.exec-use.exec-use",
+          "php.lang.security.injection.tainted-exec.tainted-exec",
+          "php.lang.security.tainted-exec.tainted-exec"
+        ],
+        "outcome": "not flagged"
+      },
+      "notes": "exec() output echoed."
+    },
+    {
+      "id": "REVIEW-XSS-PHP-003",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 18,
+      "case_span": [
+        16,
+        18
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-XSS",
+          "php.lang.security.injection.echoed-request.echoed-request"
+        ],
+        "other_rules_in_case": [
+          "php.lang.security.backticks-use.backticks-use",
+          "php.lang.security.injection.tainted-exec.tainted-exec"
+        ],
+        "outcome": "flagged"
+      },
+      "notes": "Backtick output echoed."
+    },
+    {
+      "id": "TP-XSS-PHP-004",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 23,
+      "case_span": [
+        21,
+        23
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-XSS",
+          "php.lang.security.injection.echoed-request.echoed-request"
+        ],
+        "other_rules_in_case": [
+          "PHP-019",
+          "php.lang.security.injection.tainted-filename.tainted-filename"
+        ],
+        "outcome": "detected"
+      },
+      "notes": "file_get_contents(user URL) echoed: attacker-controlled content (also SSRF/LFI)."
+    },
+    {
+      "id": "TP-XSS-PHP-005",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 28,
+      "case_span": [
+        26,
+        28
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-XSS",
+          "php.lang.security.injection.echoed-request.echoed-request"
+        ],
+        "other_rules_in_case": [
+          "PHP-030"
+        ],
+        "outcome": "detected"
+      },
+      "notes": "Attacker-supplied XML field echoed."
+    },
+    {
+      "id": "SAFE-XSS-PHP-001",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 34,
+      "case_span": [
+        33,
+        34
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "clean"
+      },
+      "notes": "Static HTML."
+    },
+    {
+      "id": "TP-XSS-PHP-007",
+      "language": "php",
+      "file": "php/xss-output.php",
+      "line": 40,
+      "case_span": [
+        39,
+        40
+      ],
+      "expected_rule": [
+        "TG-TAINT-PHP-XSS"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-TAINT-PHP-XSS"
+        ],
+        "all_rules_on_line": [
+          "TG-TAINT-PHP-XSS",
+          "php.lang.security.injection.echoed-request.echoed-request"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Reflected XSS."
+    },
+    {
+      "id": "FP-SQL-PY-001",
+      "language": "python",
+      "file": "python/sql-injection.py",
+      "line": 20,
+      "case_span": [
+        17,
+        20
+      ],
+      "expected_rule": [
+        "TG-SQL-INJECTION-PY-INLINE",
+        "TG-TAINT-PY-SQL-INJECTION"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION",
+          "python.django.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.flask.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+          "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "int() before interpolation."
+    },
+    {
+      "id": "FP-SQL-PY-002",
+      "language": "python",
+      "file": "python/sql-injection.py",
+      "line": 27,
+      "case_span": [
+        24,
+        27
+      ],
+      "expected_rule": [
+        "TG-SQL-INJECTION-PY-INLINE",
+        "TG-TAINT-PY-SQL-INJECTION"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION",
+          "python.django.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.flask.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+          "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "float() in a numeric comparison; nan/inf can only cause a SQL error, not injection."
+    },
+    {
+      "id": "TP-SQL-PY-001",
+      "language": "python",
+      "file": "python/sql-injection.py",
+      "line": 37,
+      "case_span": [
+        34,
+        37
+      ],
+      "expected_rule": [
+        "TG-SQL-INJECTION-PY-INLINE",
+        "TG-TAINT-PY-SQL-INJECTION"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION",
+          "python.django.security.injection.sql.sql-injection-using-db-cursor-execute.sql-injection-db-cursor-execute",
+          "python.django.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.flask.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+          "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Raw string in an f-string query."
+    },
+    {
+      "id": "TP-SQL-PY-002",
+      "language": "python",
+      "file": "python/sql-injection.py",
+      "line": 44,
+      "case_span": [
+        41,
+        44
+      ],
+      "expected_rule": [
+        "TG-SQL-INJECTION-PY-INLINE",
+        "TG-TAINT-PY-SQL-INJECTION"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION"
+        ],
+        "all_rules_on_line": [
+          "TG-SQL-INJECTION-PY-INLINE",
+          "TG-TAINT-PY-SQL-INJECTION",
+          "python.django.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.flask.security.injection.tainted-sql-string.tainted-sql-string",
+          "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Raw string concatenated into WHERE."
+    },
+    {
+      "id": "SAFE-SQL-PY-001",
+      "language": "python",
+      "file": "python/sql-injection.py",
+      "line": 53,
+      "case_span": [
+        51,
+        53
+      ],
+      "expected_rule": [
+        "TG-SQL-INJECTION-PY-INLINE",
+        "TG-TAINT-PY-SQL-INJECTION"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "clean"
+      },
+      "notes": "Parameterized query."
+    },
+    {
+      "id": "REVIEW-XSS-PY-001",
+      "language": "python",
+      "file": "python/xss-response.py",
+      "line": 16,
+      "case_span": [
+        13,
+        16
+      ],
+      "expected_rule": [
+        "direct-use-of-httpresponse"
+      ],
+      "classification": "review_required",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "review",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "all_rules_on_line": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "flagged"
+      },
+      "notes": "Database username: often user-chosen, so stored XSS is plausible; not provably safe."
+    },
+    {
+      "id": "FP-XSS-PY-002",
+      "language": "python",
+      "file": "python/xss-response.py",
+      "line": 21,
+      "case_span": [
+        19,
+        21
+      ],
+      "expected_rule": [
+        "direct-use-of-httpresponse"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "all_rules_on_line": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FP reproduced"
+      },
+      "notes": "Integer count rendered as str()."
+    },
+    {
+      "id": "FP-XSS-PY-003",
+      "language": "python",
+      "file": "python/xss-response.py",
+      "line": 25,
+      "case_span": [
+        24,
+        25
+      ],
+      "expected_rule": [
+        "direct-use-of-httpresponse"
+      ],
+      "classification": "confirmed_false_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": false,
+        "target_rule_ids": [],
+        "all_rules_on_line": [],
+        "other_rules_in_case": [],
+        "outcome": "not reproduced"
+      },
+      "notes": "Constant response."
+    },
+    {
+      "id": "TP-XSS-PY-001",
+      "language": "python",
+      "file": "python/xss-response.py",
+      "line": 32,
+      "case_span": [
+        31,
+        32
+      ],
+      "expected_rule": [
+        "direct-use-of-httpresponse"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "all_rules_on_line": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Request parameter reflected."
+    },
+    {
+      "id": "TP-XSS-PY-002",
+      "language": "python",
+      "file": "python/xss-response.py",
+      "line": 37,
+      "case_span": [
+        35,
+        37
+      ],
+      "expected_rule": [
+        "direct-use-of-httpresponse"
+      ],
+      "classification": "true_positive",
+      "current_expected_behavior": "finding",
+      "future_expected_behavior": "finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "all_rules_on_line": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse",
+          "python.django.security.injection.raw-html-format.raw-html-format",
+          "python.django.security.injection.reflected-data-httpresponse.reflected-data-httpresponse"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "detected"
+      },
+      "notes": "Explicit text/html with untrusted input."
+    },
+    {
+      "id": "SAFE-XSS-PY-001",
+      "language": "python",
+      "file": "python/xss-response.py",
+      "line": 45,
+      "case_span": [
+        43,
+        45
+      ],
+      "expected_rule": [
+        "direct-use-of-httpresponse"
+      ],
+      "classification": "safe_negative",
+      "current_expected_behavior": "no finding",
+      "future_expected_behavior": "no finding",
+      "observed_local": {
+        "target_rule_fired": true,
+        "target_rule_ids": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "all_rules_on_line": [
+          "python.django.security.audit.xss.direct-use-of-httpresponse.direct-use-of-httpresponse"
+        ],
+        "other_rules_in_case": [],
+        "outcome": "FLAGGED (FP)"
+      },
+      "notes": "django.utils.html.escape applied."
+    }
+  ]
+}
