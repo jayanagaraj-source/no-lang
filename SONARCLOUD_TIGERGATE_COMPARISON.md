@@ -4,41 +4,78 @@
 
 ## Results
 
-| File | Expected LOC (raw count) | SonarCloud LOC | TigerGate CLI LOC | TigerGate Dashboard LOC | SonarCloud findings | TigerGate findings |
-|---|---|---|---|---|---|---|
-| `Dockerfile` | 14 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `LICENSE` | 22 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `Makefile` | 24 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `README.md` | 30 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `docker-compose.yml` | 34 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `build.gradle` | 24 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `build.gradle.kts` | 26 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `settings.gradle` | 18 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `settings.gradle.kts` | 17 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `gradle.properties` | 8 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `notes.txt` | 17 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `config.txt` | 18 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `README-security.md` | 20 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `CHANGELOG.md` | 13 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `deploy.sh` | 17 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `setup.sh` | 16 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `.env.example` | 9 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `application.properties` | 13 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `application.yml` | 21 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `deployment.yaml` | 39 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `service.yaml` | 22 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `config.json` | 23 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `config.xml` | 15 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `main.tf` | 47 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `index.html` | 24 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `app.js` | 19 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `main.py` | 18 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `pom.xml` | 27 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| `Makefile.test` | 9 | Not tested | Not tested | Not tested | Not tested | Not tested |
-| **Total** | 604 | Not tested | Not tested | Not tested | Not tested | Not tested |
+| File | Expected LOC (raw count) | SonarCloud LOC @997a8a8 | SonarCloud LOC (next scan) | TigerGate CLI LOC | TigerGate Dashboard LOC | SonarCloud findings @997a8a8 | SonarCloud findings (next scan) | TigerGate findings |
+|---|---|---|---|---|---|---|---|---|
+| `Dockerfile` | 14 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `LICENSE` | 22 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `Makefile` | 24 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `README.md` | 30 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `docker-compose.yml` | 34 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `build-files/build.gradle` | 24 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `build-files/build.gradle.kts` | 26 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `build-files/settings.gradle` | 18 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `build-files/settings.gradle.kts` | 17 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `gradle.properties` | 8 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `notes.txt` | 17 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `config.txt` | 18 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `README-security.md` | 20 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `CHANGELOG.md` | 13 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `deploy.sh` | 17 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `setup.sh` | 16 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `.env.example` | 9 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `application.properties` | 13 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `application.yml` | 21 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `deployment.yaml` | 39 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `service.yaml` | 22 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `config.json` | 23 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `config.xml` | 15 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `main.tf` | 47 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `index.html` | 24 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `app.js` | 19 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `main.py` | 18 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `build-files/pom.xml` | 27 | 27 @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| `Makefile.test` | 9 | 0 (not indexed) @997a8a8 | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
+| **Total** | 604 | 27 @997a8a8 (xml=27) | Pending verification | Not tested | Not tested | 0 @997a8a8 | Pending verification | Not tested |
 
-Baseline from before these files were added (SonarCloud, commit `46af553`, 2026-10-24): 14 LOC (Docker only),
-9 issues (Dockerfile 8, docker-compose.yml 1). Re-record every row after the new commit is scanned.
+The `@997a8a8` columns show that scan, when the build files were still at the repo root (`pom.xml`, not `build-files/pom.xml`).
+The "next scan" columns are for the first analysis after the build files moved. TigerGate columns: not tested.
+
+## SonarCloud scan history (observed)
+
+| Commit | Date (IST) | Files indexed | LOC | Languages | Issues | Source |
+|---|---|---|---|---|---|---|
+| `46af553` (5 files) | 2026-10-24 01:19 | Dockerfile, docker-compose.yml | 14 | Docker 14 | 9 (Dockerfile 8, docker-compose.yml 1) | SonarCloud UI screenshots |
+| `997a8a8` (31 files) | 2026-10-26 11:55 | **pom.xml only** (root path) | **27** | XML 27 | **0** (0 hotspots) | Public Web API, see below |
+| Next commit (build files moved to `build-files/`) | — | Pending verification | Pending verification | Pending verification | Pending verification | — |
+
+The `46af553` analysis no longer exists in SonarCloud. The project was deleted and re-imported, so the API lists only one analysis.
+
+## Why only `pom.xml` was scanned at `997a8a8`
+
+**Verified (from SonarCloud's public Web API, 2026-10-26):**
+- `api/project_analyses/search`: 1 analysis, revision `997a8a8`. `api/ce/component`: status SUCCESS, 0 warnings.
+- `api/components/tree`: the only file indexed is `pom.xml`.
+- `api/measures/component`: `ncloc=27`, `ncloc_language_distribution=xml=27`. `pom.xml` has exactly 27 non-blank, non-comment lines.
+- `api/issues/search` and `api/hotspots/search`: 0 results.
+- The repo has `pom.xml`, `build.gradle` and `build.gradle.kts` at the root, and **no** `src/main` or `src/test` directory.
+
+**Documented (docs.sonarsource.com/sonarqube-cloud/advanced-setup/automatic-analysis/):**
+- For Java projects, the scanner "checks for the presence of a pom.xml, build.gradle, or build.gradle.kts file".
+- For those projects, `sonar.sources`, `sonar.tests`, `sonar.inclusions` and `sonar.test.inclusions` are **not supported**, because "we assume that your files will follow the standard directory layout ... (`**/src/main/**/*` and `**/src/test/**/*`)".
+- "Automatic analysis logs are not available."
+
+**Conclusion (inferred, but consistent with every observation above):** this commit added root-level Maven/Gradle build files. That switched Automatic Analysis to the Java standard-layout scope, which here covers only the build file (`pom.xml`). No `src/main` exists, so nothing else was indexed. There are no analysis logs to confirm this directly.
+
+**Consequence:** `.sonarcloud.properties` with `sonar.sources=.` would **not** fix this. That property is explicitly unsupported for Maven/Gradle projects under Automatic Analysis. No configuration file was added.
+
+**Ways to restore whole-repo scanning:**
+1. **(Applied in commit "test: reorganize build files for SonarCloud LOC analysis".)** Move `pom.xml`, `build.gradle`, `build.gradle.kts`, `settings.gradle` and `settings.gradle.kts` into a subdirectory such as `build-files/`. Contents stay the same, but paths change. Per the docs, root-level detection is what triggers Java mode.
+2. Not applied: switch to CI-based analysis (SonarScanner CLI with `sonar.sources=.`). This changes the analysis mode, and Automatic Analysis must be turned off.
+
+**Hypothesis under test:** with no `pom.xml`, `build.gradle` or `build.gradle.kts` at the root, Automatic Analysis stops using Java standard-layout scope and indexes the whole repo.
+This is **not guaranteed**. The docs do not say how build files in a subdirectory are treated in Automatic Analysis, apart from noting that CI-based analysis is required for Gradle builds that are not at the root.
+
+**Comparison finding:** with Automatic Analysis, adding one Maven/Gradle build file at the root shrank SonarCloud's scan from 2 files and 14 LOC to 1 file and 27 LOC, and dropped issues from 9 to 0. TigerGate should be checked for any similar scope switch.
 
 ## Running the scans
 
