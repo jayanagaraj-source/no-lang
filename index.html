@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- no-lang fixture page. INTENTIONALLY INSECURE: no CSP, inline JS, XSS sinks. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>no-lang</title>
+  <!-- Insecure: script loaded over plain HTTP without integrity -->
+  <script src="http://cdn.example.com/lib.js"></script>
+</head>
+<body>
+  <h1>Welcome</h1>
+  <div id="greeting"></div>
+
+  <!-- Insecure: form posts credentials over plain HTTP -->
+  <form action="http://example.com/login" method="post">
+    <input name="user">
+    <input name="password" type="text" autocomplete="on">
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Insecure: reverse tabnabbing, missing rel="noopener" -->
+  <a href="https://example.com" target="_blank">Docs</a>
+
+  <script>
+    // Insecure: URL fragment written to the DOM without encoding (DOM XSS)
+    var name = decodeURIComponent(location.hash.slice(1));
+    document.getElementById("greeting").innerHTML = "Hello " + name;
+    document.write("<p>" + location.search + "</p>");
+  </script>
+</body>
+</html>

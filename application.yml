@@ -1,0 +1,27 @@
+# Application config for the no-lang fixture (YAML).
+# INTENTIONALLY INSECURE - dummy values only.
+
+server:
+  port: 8080
+  ssl:
+    enabled: false        # Insecure: TLS disabled
+
+spring:
+  datasource:
+    url: jdbc:postgresql://pg.example.com:5432/app?sslmode=disable
+    username: app
+    password: DummyPgPass123!   # Insecure: plaintext credential
+
+  security:
+    user:
+      name: admin
+      password: admin           # Insecure: default credential
+
+app:
+  jwt:
+    secret: changeme            # Insecure: weak signing secret
+    verify-signature: false
+  csrf:
+    enabled: false              # Insecure: CSRF protection disabled
+  cors:
+    allowed-origins: "*"
