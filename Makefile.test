@@ -1,0 +1,19 @@
+# Makefile variant for the no-lang fixture.
+# INTENTIONALLY INSECURE - do not run these targets.
+
+API_TOKEN    = tok_EXAMPLE_0000000000000000
+DB_PASSWORD  = DummyDbPass123!
+
+.PHONY: deploy fetch clean-tmp
+
+# Insecure: credential passed on the command line (visible in ps)
+deploy:
+	mysql -u root -p$(DB_PASSWORD) -h db.example.com app < schema.sql
+
+# Insecure: remote script piped into a shell over plain HTTP
+fetch:
+	curl -sSL http://example.com/tool.sh | sh
+
+# Insecure: user-supplied variable expanded unquoted into a shell command
+clean-tmp:
+	rm -rf /tmp/no-lang-$(TARGET)

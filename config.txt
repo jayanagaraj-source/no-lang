@@ -1,0 +1,22 @@
+no-lang database configuration
+INTENTIONALLY INSECURE test fixture - dummy values only.
+
+[primary]
+host = db.example.com
+port = 3306
+user = root
+password = DummyDbPass123!
+
+[replica]
+host = replica.example.com
+port = 3306
+user = app
+password = DummyReplicaPass!
+
+[connection strings]
+mysql://root:DummyDbPass123!@db.example.com:3306/app
+postgres://app:DummyPgPass123!@pg.example.com:5432/app
+
+[options]
+ssl = disabled
+allow_remote_root = true

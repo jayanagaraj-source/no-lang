@@ -1,0 +1,23 @@
+{
+  "_comment": "INTENTIONALLY INSECURE no-lang fixture - dummy values only. JSON has no comment syntax.",
+  "app": {
+    "env": "production",
+    "debug": true,
+    "listen": "0.0.0.0:8080"
+  },
+  "database": {
+    "host": "db.example.com",
+    "user": "root",
+    "password": "DummyDbPass123!",
+    "ssl": false
+  },
+  "aws": {
+    "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+    "secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+  },
+  "security": {
+    "tlsVerify": false,
+    "corsOrigin": "*",
+    "sessionSecret": "changeme"
+  }
+}

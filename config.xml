@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  XML parser configuration for the no-lang fixture.
+  INTENTIONALLY INSECURE - the settings below re-enable XXE.
+-->
+<configuration>
+
+  <!-- Insecure: DOCTYPE declarations allowed -->
+  <parser name="default">
+    <feature name="http://apache.org/xml/features/disallow-doctype-decl" value="false"/>
+
+    <!-- Insecure: external general and parameter entities resolved -->
+    <feature name="http://xml.org/sax/features/external-general-entities" value="true"/>
+    <feature name="http://xml.org/sax/features/external-parameter-entities" value="true"/>
+
+    <!-- Insecure: external DTDs loaded over the network -->
+    <feature name="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="true"/>
+    <property name="expandEntityReferences" value="true"/>
+    <property name="secureProcessing" value="false"/>
+  </parser>
+
+  <datasource>
+    <user>root</user>
+    <password>DummyDbPass123!</password>
+  </datasource>
+
+</configuration>

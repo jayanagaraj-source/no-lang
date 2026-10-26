@@ -1,0 +1,28 @@
+# Kubernetes Service for the no-lang fixture.
+# INTENTIONALLY INSECURE - do not apply to a real cluster.
+apiVersion: v1
+kind: Service
+metadata:
+  name: no-lang
+  labels:
+    app: no-lang
+spec:
+  # Insecure: exposed to the internet with no source restriction
+  type: LoadBalancer
+  loadBalancerSourceRanges:
+    - 0.0.0.0/0
+  selector:
+    app: no-lang
+  ports:
+    # Insecure: SSH exposed publicly
+    - name: ssh
+      port: 22
+      targetPort: 22
+    # Insecure: database port exposed publicly
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+    # Insecure: plain HTTP, no TLS termination
+    - name: http
+      port: 80
+      targetPort: 8080

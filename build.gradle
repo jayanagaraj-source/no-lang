@@ -1,0 +1,39 @@
+// Groovy Gradle build script for the no-lang scanner test fixture.
+// INTENTIONALLY INSECURE - do not use as a template.
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example.nolang'
+version = '0.0.1'
+
+repositories {
+    // Insecure: plain-HTTP repository allows dependency tampering (MITM)
+    maven {
+        url 'http://repo.example.com/maven2'
+        allowInsecureProtocol = true
+    }
+    mavenCentral()
+}
+
+dependencies {
+    // Log4Shell - CVE-2021-44228 / GHSA-jfh8-c2jp-5v3q
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    // Spring4Shell - CVE-2022-22965
+    implementation 'org.springframework:spring-beans:5.3.17'
+}
+
+/*
+ * Insecure build configuration: compiler warnings are hidden and
+ * the JVM trusts remote JNDI codebases (Log4Shell enabler).
+ */
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << '-nowarn'
+}
+
+application {
+    mainClass = 'com.example.nolang.Main'
+    applicationDefaultJvmArgs = ['-Dcom.sun.jndi.ldap.object.trustURLCodebase=true']
+}

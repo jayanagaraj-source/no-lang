@@ -1,0 +1,42 @@
+# Kubernetes Deployment for the no-lang fixture.
+# INTENTIONALLY INSECURE - do not apply to a real cluster.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: no-lang
+  labels:
+    app: no-lang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: no-lang
+  template:
+    metadata:
+      labels:
+        app: no-lang
+    spec:
+      # Insecure: shares the node's network and process namespaces
+      hostNetwork: true
+      hostPID: true
+      automountServiceAccountToken: true
+      containers:
+        - name: app
+          image: no-lang:latest        # Insecure: mutable tag
+          securityContext:
+            privileged: true           # Insecure: full host access
+            runAsUser: 0               # Insecure: root user
+            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+            capabilities:
+              add: ["ALL"]             # Insecure: every capability
+          env:
+            - name: DB_PASSWORD
+              value: DummyDbPass123!   # Insecure: secret in plain env
+          volumeMounts:
+            - name: host-root
+              mountPath: /host
+      volumes:
+        - name: host-root
+          hostPath:
+            path: /                    # Insecure: host root filesystem

@@ -1,0 +1,23 @@
+no-lang team notes
+==================
+
+These notes are an INTENTIONALLY INSECURE test fixture.
+Every credential below is a dummy value that cannot authenticate anywhere.
+
+Staging access
+--------------
+AWS access key: AKIAIOSFODNN7EXAMPLE
+AWS secret key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+Admin login: admin / DummyAdminPass123!
+
+GitHub token for CI: ghp_EXAMPLE0000000000000000000000000000
+Stripe test key: sk_test_EXAMPLE00000000000000000000
+
+Slack alerts webhook:
+https://hooks.slack.com/services/T00000000/B00000000/EXAMPLEEXAMPLEEXAMPLE00
+
+TODO
+----
+- rotate everything above (it is fake anyway)
+- move secrets into a vault
