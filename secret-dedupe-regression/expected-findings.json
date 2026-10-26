@@ -1,0 +1,922 @@
+{
+  "schema_version": 1,
+  "fixture_root": "secret-dedupe-regression",
+  "environment_verified": {
+    "gitleaks": "8.21.2 (useDefault rules, same TOML as workers/code-reviewer engine_run.go)",
+    "semgrep": "1.168.0 with p/gitleaks + p/secrets (worker pin); CLI image pins semgrep 1.37.0, not verified",
+    "suppression": "real scanscope.SuppressSecret + SecretDeduper (workers/pkg/scanscope), run via a local harness"
+  },
+  "line_convention": "1-based line of the matched value.",
+  "expectation_layers": {
+    "security_validity": "Is this a secret leak? TP / NOT_A_SECRET / CONTEXT_DEPENDENT. Independent of any scanner.",
+    "detector_match": "Which detector rules match the line (verified locally).",
+    "dashboard_before_fix / dashboard_after_fix / cli": "Findings expected to be stored per surface. after_fix = native only, assuming the native secret scan succeeded."
+  },
+  "expected_totals_for_fixture_dir": {
+    "dashboard_before_fix": 28,
+    "dashboard_after_fix": 10,
+    "cli": 10,
+    "semgrep_secret_copies_removed_by_fix": 18
+  },
+  "cases": [
+    {
+      "id": "TG-SECRET-TP-001",
+      "file": "secret-dedupe-regression/true-positive/github-token.js",
+      "line": 5,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "github-pat",
+          "verified_locally": true,
+          "severity": "MEDIUM"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": true,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "GitHub PAT shape in live code.",
+      "native_dedupe_group": "ghp_TGfake7Qx2...Hk0Ja",
+      "note": "Exactly one of TP-001 / DUP-002 keeps the stored native finding (order-dependent; locally DUP-002 was first)."
+    },
+    {
+      "id": "TG-SECRET-TP-002",
+      "file": "secret-dedupe-regression/true-positive/aws-credentials.js",
+      "line": 6,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "aws-access-token",
+          "verified_locally": true,
+          "severity": "CRITICAL"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.aws-access-token.aws-access-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:aws-access-token",
+        "semgrep:generic.secrets.gitleaks.aws-access-token.aws-access-token"
+      ],
+      "dashboard_after_fix": [
+        "native:aws-access-token"
+      ],
+      "cli": [
+        "native:aws-access-token"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "AWS access key ID shape in live code (not the AWS doc placeholder)."
+    },
+    {
+      "id": "TG-SECRET-TP-003",
+      "file": "secret-dedupe-regression/true-positive/slack-token.js",
+      "line": 5,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "slack-bot-token",
+          "verified_locally": true,
+          "severity": "HIGH"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.slack-bot-token.slack-bot-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:slack-bot-token",
+        "semgrep:generic.secrets.gitleaks.slack-bot-token.slack-bot-token"
+      ],
+      "dashboard_after_fix": [
+        "native:slack-bot-token"
+      ],
+      "cli": [
+        "native:slack-bot-token"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "Slack bot token shape in live code."
+    },
+    {
+      "id": "TG-SECRET-TP-004",
+      "file": "secret-dedupe-regression/true-positive/generic-api-key.js",
+      "line": 5,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "generic-api-key",
+          "verified_locally": true,
+          "severity": "HIGH"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.generic-api-key.generic-api-key"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:generic-api-key",
+        "semgrep:generic.secrets.gitleaks.generic-api-key.generic-api-key"
+      ],
+      "dashboard_after_fix": [
+        "native:generic-api-key"
+      ],
+      "cli": [
+        "native:generic-api-key"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "High-entropy value assigned to an api-key variable."
+    },
+    {
+      "id": "TG-SECRET-TP-006",
+      "file": "secret-dedupe-regression/true-positive/generic-api-key.js",
+      "line": 8,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "generic-api-key",
+          "verified_locally": true,
+          "severity": "HIGH"
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:generic-api-key"
+      ],
+      "dashboard_after_fix": [
+        "native:generic-api-key"
+      ],
+      "cli": [
+        "native:generic-api-key"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "High-entropy api_key object property; native-only detection (Semgrep p/gitleaks does not match)."
+    },
+    {
+      "id": "TG-SECRET-TP-005A",
+      "file": "secret-dedupe-regression/true-positive/repeated-secret.js",
+      "line": 6,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "github-pat",
+          "verified_locally": true,
+          "severity": "MEDIUM"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:github-pat",
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [
+        "native:github-pat"
+      ],
+      "cli": [
+        "native:github-pat"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "First occurrence of a value repeated in the same file."
+    },
+    {
+      "id": "TG-SECRET-TP-005B",
+      "file": "secret-dedupe-regression/true-positive/repeated-secret.js",
+      "line": 9,
+      "category": "true-positive",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "github-pat",
+          "verified_locally": true,
+          "severity": "MEDIUM"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": true,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "Second occurrence; native (rule, value) dedupe should collapse it."
+    },
+    {
+      "id": "TG-SECRET-FP-001A",
+      "file": "secret-dedupe-regression/false-positive/i18n-labels.json",
+      "line": 3,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.generic-api-key.generic-api-key"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.generic-api-key.generic-api-key"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "Translation label. Note: file is not under i18n/ or locales/, so SuppressSecret's translation rule would not apply if native matched."
+    },
+    {
+      "id": "TG-SECRET-FP-001B",
+      "file": "secret-dedupe-regression/false-positive/i18n-labels.json",
+      "line": 4,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Translation label."
+    },
+    {
+      "id": "TG-SECRET-FP-001C",
+      "file": "secret-dedupe-regression/false-positive/i18n-labels.json",
+      "line": 5,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Translation label."
+    },
+    {
+      "id": "TG-SECRET-FP-002A",
+      "file": "secret-dedupe-regression/false-positive/non-secret-identifiers.json",
+      "line": 4,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Key identifier, not key material."
+    },
+    {
+      "id": "TG-SECRET-FP-002B",
+      "file": "secret-dedupe-regression/false-positive/non-secret-identifiers.json",
+      "line": 3,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.security.detected-google-gcm-service-account.detected-google-gcm-service-account"
+          ],
+          "severities": [
+            "ERROR"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.security.detected-google-gcm-service-account.detected-google-gcm-service-account"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "Account type string; no key material in the file."
+    },
+    {
+      "id": "TG-SECRET-FP-003A",
+      "file": "secret-dedupe-regression/false-positive/placeholders.js",
+      "line": 5,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Documentation placeholder."
+    },
+    {
+      "id": "TG-SECRET-FP-003B",
+      "file": "secret-dedupe-regression/false-positive/placeholders.js",
+      "line": 6,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Documentation placeholder."
+    },
+    {
+      "id": "TG-SECRET-FP-003C",
+      "file": "secret-dedupe-regression/false-positive/placeholders.js",
+      "line": 7,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.aws-access-token.aws-access-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.aws-access-token.aws-access-token"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "AWS-published documentation key (in SuppressSecret's placeholder list)."
+    },
+    {
+      "id": "TG-SECRET-FP-003D",
+      "file": "secret-dedupe-regression/false-positive/placeholders.js",
+      "line": 8,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "Masked token placeholder."
+    },
+    {
+      "id": "TG-SECRET-FP-004A",
+      "file": "secret-dedupe-regression/false-positive/commented-secrets.js",
+      "line": 6,
+      "category": "false-positive",
+      "security_validity": "CONTEXT_DEPENDENT",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "github-pat",
+          "verified_locally": true,
+          "severity": "MEDIUM"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": true,
+      "native_suppression_reason": "commented line, not live code",
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "Full-line commented token. Not live code, but a real value in a comment would still be leaked."
+    },
+    {
+      "id": "TG-SECRET-FP-004B",
+      "file": "secret-dedupe-regression/false-positive/commented-secrets.js",
+      "line": 10,
+      "category": "false-positive",
+      "security_validity": "CONTEXT_DEPENDENT",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "slack-bot-token",
+          "verified_locally": true,
+          "severity": "HIGH"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.slack-bot-token.slack-bot-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": true,
+      "native_suppression_reason": "commented line, not live code",
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.slack-bot-token.slack-bot-token"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "Token on a block-comment line."
+    },
+    {
+      "id": "TG-SECRET-FP-004C",
+      "file": "secret-dedupe-regression/false-positive/commented-secrets.js",
+      "line": 14,
+      "category": "false-positive",
+      "security_validity": "CONTEXT_DEPENDENT",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "aws-access-token",
+          "verified_locally": true,
+          "severity": "CRITICAL"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.aws-access-token.aws-access-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:aws-access-token",
+        "semgrep:generic.secrets.gitleaks.aws-access-token.aws-access-token"
+      ],
+      "dashboard_after_fix": [
+        "native:aws-access-token"
+      ],
+      "cli": [
+        "native:aws-access-token"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "Key in a trailing comment on a live line; SuppressSecret deliberately does not treat trailing comments as comments."
+    },
+    {
+      "id": "TG-SECRET-FP-005A",
+      "file": "secret-dedupe-regression/false-positive/documentation-examples.md",
+      "line": 8,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Documentation placeholder."
+    },
+    {
+      "id": "TG-SECRET-FP-005B",
+      "file": "secret-dedupe-regression/false-positive/documentation-examples.md",
+      "line": 9,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.aws-access-token.aws-access-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "semgrep:generic.secrets.gitleaks.aws-access-token.aws-access-token"
+      ],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": true,
+      "appears_after_fix": false,
+      "reason": "AWS-published documentation key in Markdown."
+    },
+    {
+      "id": "TG-SECRET-FP-005C",
+      "file": "secret-dedupe-regression/false-positive/documentation-examples.md",
+      "line": 15,
+      "category": "false-positive",
+      "security_validity": "NOT_A_SECRET",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": null,
+          "verified_locally": true,
+          "severity": null
+        },
+        "semgrep": {
+          "rule_ids": [],
+          "severities": [],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [],
+      "dashboard_after_fix": [],
+      "cli": [],
+      "appears_before_fix": false,
+      "appears_after_fix": false,
+      "reason": "Documentation placeholder."
+    },
+    {
+      "id": "TG-SECRET-DUP-001",
+      "file": "secret-dedupe-regression/duplicate/same-secret-two-engines.js",
+      "line": 5,
+      "category": "duplicate",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "github-pat",
+          "verified_locally": true,
+          "severity": "MEDIUM"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:github-pat",
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [
+        "native:github-pat"
+      ],
+      "cli": [
+        "native:github-pat"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "Same secret, same file, same line: both engines report it before the fix."
+    },
+    {
+      "id": "TG-SECRET-DUP-002",
+      "file": "secret-dedupe-regression/duplicate/same-secret-multiple-files.js",
+      "line": 6,
+      "category": "duplicate",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "github-pat",
+          "verified_locally": true,
+          "severity": "MEDIUM"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.github-pat.github-pat"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:github-pat",
+        "semgrep:generic.secrets.gitleaks.github-pat.github-pat"
+      ],
+      "dashboard_after_fix": [
+        "native:github-pat"
+      ],
+      "cli": [
+        "native:github-pat"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "Same value as TP-001 in another file; native keeps exactly one of TP-001/DUP-002.",
+      "native_dedupe_group": "ghp_TGfake7Qx2...Hk0Ja",
+      "note": "Exactly one of TP-001 / DUP-002 keeps the stored native finding (order-dependent; locally DUP-002 was first)."
+    },
+    {
+      "id": "TG-SECRET-DUP-003A",
+      "file": "secret-dedupe-regression/duplicate/same-secret-two-engines.js",
+      "line": 8,
+      "category": "duplicate",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "aws-access-token",
+          "verified_locally": true,
+          "severity": "CRITICAL"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.aws-access-token.aws-access-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:aws-access-token",
+        "semgrep:generic.secrets.gitleaks.aws-access-token.aws-access-token"
+      ],
+      "dashboard_after_fix": [
+        "native:aws-access-token"
+      ],
+      "cli": [
+        "native:aws-access-token"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "Different secret value/type in the same file as DUP-001."
+    },
+    {
+      "id": "TG-SECRET-DUP-003B",
+      "file": "secret-dedupe-regression/duplicate/same-secret-two-engines.js",
+      "line": 9,
+      "category": "duplicate",
+      "security_validity": "TP",
+      "detector_match": {
+        "native_gitleaks": {
+          "rule_id": "slack-bot-token",
+          "verified_locally": true,
+          "severity": "HIGH"
+        },
+        "semgrep": {
+          "rule_ids": [
+            "generic.secrets.gitleaks.slack-bot-token.slack-bot-token"
+          ],
+          "severities": [
+            "INFO"
+          ],
+          "verified_locally": true
+        }
+      },
+      "native_suppressed": false,
+      "native_suppression_reason": null,
+      "native_deduplicated": false,
+      "dashboard_before_fix": [
+        "native:slack-bot-token",
+        "semgrep:generic.secrets.gitleaks.slack-bot-token.slack-bot-token"
+      ],
+      "dashboard_after_fix": [
+        "native:slack-bot-token"
+      ],
+      "cli": [
+        "native:slack-bot-token"
+      ],
+      "appears_before_fix": true,
+      "appears_after_fix": true,
+      "reason": "Third secret type in the same file."
+    }
+  ],
+  "repository_level_cases": [
+    {
+      "id": "TG-SECRET-DUP-004",
+      "scope": "repository",
+      "category": "duplicate",
+      "assertion": "Multiple secret types (github-pat, aws-access-token, slack-bot-token, generic-api-key) present in one scan; each type follows the same before/after behavior."
+    }
+  ]
+}

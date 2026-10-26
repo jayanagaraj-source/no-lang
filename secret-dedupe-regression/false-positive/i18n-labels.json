@@ -1,0 +1,7 @@
+{
+  "_comment": "TG-SECRET-FP-001: UI translation labels. Not secrets.",
+  "BTN_AUTHENTICATE": "Uwierzytelnij",
+  "LBL_API_KEY": "Klucz API",
+  "LBL_SECRET_TOKEN": "Token tajny",
+  "MSG_AUTH_FAILED": "Uwierzytelnianie nie powiodlo sie"
+}
